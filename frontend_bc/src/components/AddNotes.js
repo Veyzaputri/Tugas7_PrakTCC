@@ -22,7 +22,7 @@ function AddNotes() {
                     notes,
                 },
             );
-            navigate("/");
+            navigate("/notes");
         } catch (error) {
             console.log(error);
             alert("Gagal menyimpan catatan. Coba login ulang jika perlu.");
