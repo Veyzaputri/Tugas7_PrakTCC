@@ -11,16 +11,7 @@ dotenv.config();
 const app = express();
 
 app.use(cookieParser());
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || origin.endsWith(".appspot.com")) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
-}));
+app.use(cors({ credentials:true,origin:'https://e-13-450704.uc.r.appspot.com' }));
 app.use(express.json());
 
 app.use(UserRoute);
