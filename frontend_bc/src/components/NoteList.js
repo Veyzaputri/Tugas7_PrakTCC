@@ -11,15 +11,34 @@ const NoteList = () => {
     getNotes();
   }, []);
 
+ 
   const getNotes = async () => {
-  try {
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
-      setMsg("Silakan login terlebih dahulu.");
-      return;
+    try {
+      const token = localStorage.getItem("accessToken");
+      if (!token) {
+        setMsg("Silakan login terlebih dahulu.");
+        return;
+      }
+
+      const response = await API.get("/notes", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      setNotes(response.data);
+      setMsg("");
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 403) {
+        setMsg("Akses ditolak. Silakan login ulang.");
+      } else if (error.response && error.response.status === 401) {
+        setMsg("Token tidak valid atau sudah kadaluwarsa. Silakan login ulang.");
+      } else {
+        setMsg("Gagal mengambil data catatan");
+      }
     }
-  }
-    };
+  };
 
   const handleLogout = async () => {
     try {
@@ -30,29 +49,6 @@ const NoteList = () => {
       console.error("Gagal logout:", error);
     }
   };
-
-
-    const response = await API.get("/notes", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    });
-    setNotes(response.data);
-    setMsg("");
-  } catch (error) {
-    console.error(error);
-    if (error.response && error.response.status === 403) {
-      setMsg("Akses ditolak. Silakan login ulang.");
-      // redirect ke login jika perlu
-    } else if (error.response && error.response.status === 401) {
-      setMsg("Token tidak valid atau sudah kadaluwarsa. Silakan login ulang.");
-      // redirect ke login jika perlu
-    } else {
-      setMsg("Gagal mengambil data catatan");
-    }
-  }
-};
 
   const deleteNotes = async (id) => {
     try {
