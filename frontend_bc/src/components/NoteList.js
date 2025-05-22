@@ -113,9 +113,12 @@ const NoteList = () => {
             )}
           </tbody>
         </table>
-        <button onClick={handleLogout} className="button is-danger is-rounded">
-          Logout
-        </button>
+       <button
+        onClick={handleLogout}
+        className="button is-danger is-rounded mt-5 is-fullwidth"
+      >
+        Logout
+      </button>
       </div>
     </div>
   );
