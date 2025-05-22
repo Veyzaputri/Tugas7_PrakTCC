@@ -18,6 +18,17 @@ const NoteList = () => {
       return;
     }
 
+   const handleLogout = async () => {
+      try {
+        await API.delete("/logout", { withCredentials: true });
+        localStorage.removeItem("accessToken");
+        navigate("/"); // redirect ke halaman login
+      } catch (error) {
+        console.error("Gagal logout:", error);
+      }
+    };
+
+
     const response = await API.get("/notes", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -103,6 +114,9 @@ const NoteList = () => {
             )}
           </tbody>
         </table>
+        <button onClick={handleLogout} className="button is-danger is-rounded">
+          Logout
+        </button>
       </div>
     </div>
   );
