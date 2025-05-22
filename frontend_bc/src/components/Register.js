@@ -12,7 +12,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await API.post("/register", { username, password });
-      navugate("/");
+      navigate("/");
     } catch (error) {
       if (error.response) setMsg(error.response.data.msg);
       else setMsg("Gagal registrasi");
