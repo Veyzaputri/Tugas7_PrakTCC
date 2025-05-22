@@ -5,6 +5,7 @@ import { API } from "../utils"; // pastikan ini sudah ada
 const NoteList = () => {
   const [notes, setNotes] = useState([]);
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getNotes();
@@ -17,16 +18,18 @@ const NoteList = () => {
       setMsg("Silakan login terlebih dahulu.");
       return;
     }
-
-   const handleLogout = async () => {
-      try {
-        await API.delete("/logout", { withCredentials: true });
-        localStorage.removeItem("accessToken");
-        navigate("/"); // redirect ke halaman login
-      } catch (error) {
-        console.error("Gagal logout:", error);
-      }
+  }
     };
+
+  const handleLogout = async () => {
+    try {
+      await API.delete("/logout", { withCredentials: true });
+      localStorage.removeItem("accessToken");
+      navigate("/"); // redirect ke halaman login
+    } catch (error) {
+      console.error("Gagal logout:", error);
+    }
+  };
 
 
     const response = await API.get("/notes", {
