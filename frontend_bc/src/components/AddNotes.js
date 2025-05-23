@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils";
+import { API } from "../utils";
 
 function AddNotes() {
     const [creator, setCreator] = useState("");
