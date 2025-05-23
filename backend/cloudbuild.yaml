@@ -34,7 +34,7 @@ steps:
       [
         "run",
         "deploy",
-        "backend-notes-vey",
+        "backend",
         "--image",
         "gcr.io/$PROJECT_ID/backend-notes-vey",
         "--timeout",
