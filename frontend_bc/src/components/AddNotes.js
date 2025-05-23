@@ -14,8 +14,8 @@ function AddNotes() {
         try {
             const token = localStorage.getItem("accessToken"); // ambil token
 
-            await axios.post(
-                `${BASE_URL}/add-notes`, // sebaiknya endpoint untuk tambah notes konsisten, misal /notes
+            await API.post(
+                "/add-notes", // sebaiknya endpoint untuk tambah notes konsisten, misal /notes
                 {
                     creator,
                     title,
