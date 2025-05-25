@@ -26,7 +26,7 @@ function EditNotes() {
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
+                },withCredentials:true,
             });
 
             navigate("/notes");
@@ -40,10 +40,11 @@ function EditNotes() {
         try {
             const token = localStorage.getItem("accessToken");
 
-            const response = await axios.get(`${BASE_URL}/notes/${id}`, {
+            const response = await API.get(`/notes/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
+                },
+                withCredentials:true,
             });
 
             setCreator(response.data.creator);
