@@ -19,7 +19,7 @@ function EditNotes() {
         try {
             const token = localStorage.getItem("accessToken");
 
-            await axios.patch(`${BASE_URL}/edit-notes/${id}`, {
+            await API.patch(`/edit-notes/${id}`, {
                 creator,
                 title,
                 notes
